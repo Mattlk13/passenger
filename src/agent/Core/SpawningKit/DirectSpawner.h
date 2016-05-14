@@ -161,7 +161,7 @@ public:
 		possiblyRaiseInternalError(options);
 
 		shared_array<const char *> args;
-		SpawnPreparationInfo preparation = prepareSpawn(options);
+		SpawnPreparationInfo preparation = prepareSpawn(options, config);
 		vector<string> command = createCommand(options, preparation, args);
 		SocketPair adminSocket = createUnixSocketPair(__FILE__, __LINE__);
 		Pipe errorPipe = createPipe(__FILE__, __LINE__);

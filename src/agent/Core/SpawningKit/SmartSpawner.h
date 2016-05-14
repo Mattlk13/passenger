@@ -209,7 +209,7 @@ private:
 		checkChrootDirectories(options);
 
 		shared_array<const char *> args;
-		preparation = prepareSpawn(options);
+		preparation = prepareSpawn(options, config);
 		vector<string> command = createRealPreloaderCommand(options, args);
 		SocketPair adminSocket = createUnixSocketPair(__FILE__, __LINE__);
 		Pipe errorPipe = createPipe(__FILE__, __LINE__);
