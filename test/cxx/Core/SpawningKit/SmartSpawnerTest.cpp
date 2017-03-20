@@ -106,11 +106,6 @@ namespace tut {
 	}
 
 	TEST_METHOD(82) {
-#if defined(BOOST_OS_MACOS)
-		if (getenv("TRAVIS_RUBY_VERSION") != NULL) {
-			return;
-		}
-#endif
 		set_test_name("If the preloader didn't start within the timeout "
 			"then it's killed and an exception is thrown, with "
 			"whatever stderr output as error page");
@@ -137,6 +132,12 @@ namespace tut {
 				// This might be caused by the machine being too slow.
 				// Try again with a higher timeout.
 				options.startTimeout = 1000;
+#if defined(BOOST_OS_MACOS)
+		if (getenv("TRAVIS_RUBY_VERSION") != NULL) {
+			options.startTimeout = 15000;
+//			return;
+		}
+#endif
 				SmartSpawner spawner2(preloaderCommand, options, config);
 				try {
 					spawner2.spawn(options);
